@@ -1,0 +1,26 @@
+name: Build Qt Project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Qt
+      run: |
+        sudo apt update
+        sudo apt install qt5-qmake qtbase5-dev
+
+    - name: Build Project
+      run: |
+        qmake
+        make
